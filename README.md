@@ -1,4 +1,4 @@
-# OWASP VWAD — GitHub Pages
+# OWASP VWAD - GitHub Pages
 
 Standalone GitHub Pages site for the OWASP Vulnerable Web Applications Directory (VWAD) project. Static HTML/CSS, no build step, easy to maintain and test locally.
 
@@ -27,13 +27,13 @@ The same files work at any base path. A small script in each page sets `window.V
 
 ## Structure
 
-- `index.html` — Homepage with browse-all and search (by name, author, technology, notes, collection).
-- `app.html` — App detail page; use `app.html#<slug>` for a specific app (e.g. `app.html#dot-net-goat`). Each app has a unique URL with full details (collections, technology, author, notes, references, stars).
-- `data/collection.json` — Copy of the directory data from the main project; update from `_data/collection.json` when needed.
-- `js/app.js` — Loads collection, assigns unique slugs, search/filter API.
-- `js/home.js` — Browse table and search UI.
-- `js/app-viewer.js` — Renders a single app on `app.html` (and on `404.html` when GitHub Pages serves `/app/<slug>`).
-- `css/site.css` — Standalone styles (OWASP community–aligned theme).
+- `index.html` - Homepage with browse-all and search (by name, author, technology, notes, collection).
+- `app.html` - App detail page; use `app.html#<slug>` for a specific app (e.g. `app.html#dot-net-goat`). Each app has a unique URL with full details (collections, technology, author, notes, references, stars).
+- `data/collection.json` - Copy of the directory data from the main project; update from `_data/collection.json` when needed.
+- `js/app.js` - Loads collection, assigns unique slugs, search/filter API.
+- `js/home.js` - Browse table and search UI.
+- `js/app-viewer.js` - Renders a single app on `app.html` (and on `404.html` when GitHub Pages serves `/app/<slug>`).
+- `css/site.css` - Standalone styles (OWASP community–aligned theme).
 - No build tools; add more `.html` and assets as needed.
 
 ## Cache busting

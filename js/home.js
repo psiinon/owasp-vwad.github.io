@@ -27,11 +27,6 @@
         vb = (b.name || '').toLowerCase();
         return mult * (va < vb ? -1 : va > vb ? 1 : 0);
       }
-      if (sortBy === 'author') {
-        va = (a.author || '').toLowerCase();
-        vb = (b.author || '').toLowerCase();
-        return mult * (va < vb ? -1 : va > vb ? 1 : 0);
-      }
       if (sortBy === 'stars') {
         va = a.stars != null ? Number(a.stars) : -1;
         vb = b.stars != null ? Number(b.stars) : -1;
@@ -53,7 +48,7 @@
     var sortBy = sortState && sortState.column;
     var sortDir = sortState && sortState.dir;
     var th = function (key, label) {
-      var isSortable = key === 'name' || key === 'author' || key === 'stars' || key === 'updated';
+      var isSortable = key === 'name' || key === 'stars' || key === 'updated';
       if (!isSortable) return '<th>' + escapeHtml(label) + '</th>';
       var ariaSort = sortBy === key ? (sortDir === 'asc' ? 'ascending' : 'descending') : 'none';
       var cls = 'sortable' + (sortBy === key ? ' sorted-' + sortDir : '');
@@ -61,24 +56,34 @@
     };
     var clearSortHtml = sortState ? '<div class="table-toolbar"><button type="button" class="sort-clear">Clear sort</button></div>' : '';
     var html = '<div class="table-scroll-outer"><div class="table-wrap">' + clearSortHtml + '<table class="apps-table"><thead><tr>';
-    html += th('name', 'Name') + '<th>Collections</th><th>Technology</th>' + th('author', 'Author') + th('stars', 'Stars') + th('updated', 'Updated');
+    html += th('name', 'Name') + '<th>Collections</th><th>Tech &amp; categories</th>' + th('stars', 'Stars') + th('updated', 'Updated');
     html += '</tr></thead><tbody>';
     apps.forEach(function (app) {
       var url = getAppUrl(app);
       var updatedBand = window.VWAD && window.VWAD.getUpdatedBand ? window.VWAD.getUpdatedBand(app.last_contributed) : null;
       var updatedCell = updatedBand
         ? '<span class="pill pill-updated pill-updated-' + escapeHtml(updatedBand.slug) + '" title="Last contribution">' + escapeHtml(updatedBand.label) + '</span>'
-        : '—';
+        : '-';
       html += '<tr>';
       html += '<td><a href="' + escapeHtml(url) + '">' + escapeHtml(app.name) + '</a></td>';
+      var collTitles = window.VWAD && window.VWAD.COLLECTION_TOOLTIPS ? window.VWAD.COLLECTION_TOOLTIPS : {};
+      var catTitles = window.VWAD && window.VWAD.CATEGORY_TOOLTIPS ? window.VWAD.CATEGORY_TOOLTIPS : {};
       html += '<td>' + (app.collection || []).map(function (c) {
-        return '<span class="pill pill-collection">' + escapeHtml(c) + '</span>';
+        var title = collTitles[c];
+        var titleAttr = title ? ' title="' + escapeHtml(title) + '"' : '';
+        return '<span class="pill pill-collection"' + titleAttr + '>' + escapeHtml(c) + '</span>';
       }).join(' ') + '</td>';
-      html += '<td>' + (app.technology || []).slice(0, 3).map(function (t) {
+      var tech = (app.technology || []).map(function (t) {
         return '<span class="pill">' + escapeHtml(t) + '</span>';
-      }).join(' ') + (app.technology && app.technology.length > 3 ? ' …' : '') + '</td>';
-      html += '<td>' + escapeHtml(app.author || '—') + '</td>';
-      html += '<td>' + (app.stars != null ? escapeHtml(String(app.stars)) : '—') + '</td>';
+      }).join(' ');
+      var categories = (app.categories || []).map(function (c) {
+        var label = c === 'ctf' ? 'CTF' : c;
+        var title = catTitles[c];
+        var titleAttr = title ? ' title="' + escapeHtml(title) + '"' : '';
+        return '<span class="pill pill-category"' + titleAttr + '>' + escapeHtml(label) + '</span>';
+      }).join(' ');
+      html += '<td>' + tech + (tech && categories ? ' ' : '') + categories + '</td>';
+      html += '<td>' + (app.stars != null ? escapeHtml(String(app.stars)) : '-') + '</td>';
       html += '<td>' + updatedCell + '</td>';
       html += '</tr>';
     });
