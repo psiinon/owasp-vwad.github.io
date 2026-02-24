@@ -33,7 +33,7 @@
   window.VWAD.getAppBySlug(slug).then(function (app) {
     hide(loading);
     if (app) {
-      document.title = app.name + ' — OWASP VWAD';
+      document.title = app.name + ' - OWASP VWAD';
       appView.innerHTML = window.VWAD.renderApp(app, { backLink: true });
       show(appView);
       hide(notFound);

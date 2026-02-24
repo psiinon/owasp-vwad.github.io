@@ -57,7 +57,7 @@
     return p === 'light' ? 'dark' : p === 'dark' ? 'system' : 'light';
   }
 
-  /* 24x24 viewBox — sun, crescent moon, monitor */
+  /* 24x24 viewBox - sun, crescent moon, monitor */
   var SUN_PATH = '<path fill="currentColor" d="M12 18a6 6 0 0 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.514 4.929l1.414 1.414L4.929 6.343 3.514 4.93zM19.071 17.657l1.414 1.414-1.414 1.414-1.414-1.414 1.414-1.414zM1 12h3v2H1v-2zm19 0h3v2h-3v-2zM4.929 19.071l1.414-1.414 1.414 1.414-1.414 1.414-1.414-1.414zm12.728-12.728l1.414-1.414 1.414 1.414-1.414 1.414-1.414-1.414z"/>';
   var MOON_PATH = '<path fill="currentColor" d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/>';
   var SYSTEM_PATH = '<path fill="currentColor" d="M2 4h20v12H2V4zm2 2v8h16V6H4zm4 10v2h8v-2H8z"/>';
